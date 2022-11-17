@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name" >Lyrics AI</string>
+    <string name="version"></string>
+    <string name="albums">albums: %d</string>
+    <string name="unknown_year">N&#x2F;A</string>
+    <string name="no_eq">No equalizer found!</string>
+    <string name="bad_id">Play a song first!</string>
+    <string name="artist_info">&lt;b>Albums:&lt;/b>&#160;%1d&#160;&lt;b>Songs:&lt;/b>&#160;%2d</string>
+    <string name="playing_song">&lt;b>%1s&lt;/b>&lt;br/>%2s</string>
+    <string name="no_browser">No browser found!</string>
+    <string name="onlinesongs_key">83d35bb4a8mshececdd8638e07f2p138608jsnb2a57f9766b2</string>
+    <string name="perm_rationale">Lyrics AI needs access to your files to play music!</string>
+    <string name="error_no_music">No music found on your phone!</string>
+</resources>
