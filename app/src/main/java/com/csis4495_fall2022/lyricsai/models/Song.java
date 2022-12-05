@@ -9,13 +9,13 @@ public class Song {
 
     static final Song EMPTY_SONG = new Song("", -1, -1, -1, null, "", -1, "");
 
-    private final String mTitle;
+    private  String mTitle;
     private final int mTrackNumber;
     private final int mDuration;
     private final String mPath;
-    private final String mAlbumName;
+    private  String mAlbumName;
     private final int mArtistId;
-    private final String mArtistName;
+    private  String mArtistName;
     private final int mYear;
     private Album mSongAlbum;
 
@@ -28,6 +28,14 @@ public class Song {
         mAlbumName = albumName;
         mArtistId = artistId;
         mArtistName = artistName;
+    }
+
+    public void setmAlbumName(String mAlbumName) {
+        this.mAlbumName = mAlbumName;
+    }
+
+    public void setmArtistName(String mArtistName) {
+        this.mArtistName = mArtistName;
     }
 
     @NonNull

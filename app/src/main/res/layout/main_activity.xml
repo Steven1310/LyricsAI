@@ -43,6 +43,5 @@
     </LinearLayout>
 
     <include
-        android:id="@+id/layoutPCP"
         layout="@layout/player_controls_panel"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
