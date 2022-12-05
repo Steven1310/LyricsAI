@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:baselineAligned="false"
     android:foreground="?android:attr/selectableItemBackgroundBorderless"
@@ -9,7 +10,7 @@
     android:orientation="horizontal"
     android:paddingTop="24dp"
     android:paddingBottom="24dp"
-    android:weightSum="6">
+    android:weightSum="7">
 
     <TextView
         android:id="@+id/track"
@@ -37,6 +38,13 @@
         android:singleLine="true"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/editSongDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:icon="@mipmap/edit" />
 
     <TextView
         android:id="@+id/duration"
