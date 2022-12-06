@@ -243,6 +243,31 @@ public class MainActivity extends AppCompatActivity implements SongsAdapter.Song
         requestQueue.add(jsonObjectRequest);
     }
 
+    private void fetchLyrics() {
+        String url = "https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?apikey=29d67bdb40f38ca2f8974b02517f936d&q_track=&q_artist=";
+
+        JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+            try {
+                JSONObject message = response.getJSONObject("message");
+                JSONObject body = message.getJSONObject("body");
+                JSONObject lyrics = body.getJSONObject("lyrics");
+                String lyricsBody = lyrics.getString("lyrics_body");
+                Log.i("MainActivityfetch",""+lyricsBody);
+            } catch (JSONException e) {
+                Log.i("MainActivityfetch",""+e.getMessage());
+                e.printStackTrace();
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
 
     @Override
     public void onResume() {
@@ -847,7 +872,6 @@ public class MainActivity extends AppCompatActivity implements SongsAdapter.Song
                         scrollToPlayedAlbumPosition(false);
                     }
                 } else {
-                    // else else else do whatever You think is right with the reveal animation!
                     // we are not playing anything in this phase
                     revealView(mArtistDetails, mArtistsRecyclerView, !sArtistDiscographyExpanded);
                 }
