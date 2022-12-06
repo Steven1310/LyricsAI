@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements SongsAdapter.Song
     ConstraintLayout constraint_layoutMain;
     private ArrayList<OnlineSong> onlineSongArrayList;
     OnlineSongAdapter onlineSongAdapter;
+    String lyricsBody ="Lyrics not generated";
     private final ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(@NonNull final ComponentName componentName, @NonNull final IBinder iBinder) {
@@ -243,16 +244,17 @@ public class MainActivity extends AppCompatActivity implements SongsAdapter.Song
         requestQueue.add(jsonObjectRequest);
     }
 
-    private void fetchLyrics() {
-        String url = "https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?apikey=29d67bdb40f38ca2f8974b02517f936d&q_track=&q_artist=";
+    private String fetchLyrics(String artist, String name) {
+        String url = "https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?apikey=29d67bdb40f38ca2f8974b02517f936d&q_track="+name+"&q_artist="+artist;
 
         JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(Request.Method.GET, url, null, response -> {
             try {
                 JSONObject message = response.getJSONObject("message");
                 JSONObject body = message.getJSONObject("body");
                 JSONObject lyrics = body.getJSONObject("lyrics");
-                String lyricsBody = lyrics.getString("lyrics_body");
+                 lyricsBody = lyrics.getString("lyrics_body");
                 Log.i("MainActivityfetch",""+lyricsBody);
+                mSongsAdapter.displayLyrics(lyricsBody.substring(0,lyricsBody.lastIndexOf("...")));
             } catch (JSONException e) {
                 Log.i("MainActivityfetch",""+e.getMessage());
                 e.printStackTrace();
@@ -266,6 +268,7 @@ public class MainActivity extends AppCompatActivity implements SongsAdapter.Song
         });
 
         requestQueue.add(jsonObjectRequest);
+        return  lyricsBody;
     }
 
 
@@ -791,6 +794,7 @@ public class MainActivity extends AppCompatActivity implements SongsAdapter.Song
         }
         mPlayerAdapter.setCurrentSong(playedSong, songsForPlayedArtist);
         mPlayerAdapter.initMediaPlayer(playedSong);
+        fetchLyrics(playedSong.getArtistName(),playedSong.getSongTitle());
     }
 
     @Override
