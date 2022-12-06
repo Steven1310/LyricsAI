@@ -34,4 +34,9 @@
     <style name="SearchBarStyle" parent="ThemeOverlay.AppCompat.ActionBar">
         <item name="colorAccent">?attr/icon_color</item>
     </style>
+
+    <style name="animation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
 </resources>
