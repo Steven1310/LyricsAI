@@ -41,6 +41,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SimpleViewHo
     private final Context mContext;
     private List<Song> mSongs;
     private Album mAlbum;
+    SimpleViewHolder holder;
 
     public SongsAdapter(@NonNull final Context context, @NonNull final Album album) {
         mContext = context;
@@ -54,6 +55,16 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SimpleViewHo
         mSongs = mAlbum.getSongs();
         notifyDataSetChanged();
     }
+
+    public void updateHolder(SimpleViewHolder holder){
+        this.holder=holder;
+    }
+
+    public void displayLyrics(String lyrics){
+        this.holder.tvLyrics.setText(lyrics);
+    }
+
+
 
     @Override
     @NonNull
@@ -75,6 +86,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SimpleViewHo
         holder.track.setText(String.valueOf(songTrack));
         holder.title.setText(songTitle);
         holder.duration.setText(Song.formatDuration(song.getSongDuration()));
+        updateHolder(holder);
     }
 
     @Override
@@ -95,6 +107,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SimpleViewHo
         TextView okay_text, cancel_text;
         EditText etSongName,etAlbumName, etArtistName;
         MediaScannerConnection scanner;
+        TextView tvLyrics;
 
         SimpleViewHolder(@NonNull final View itemView) {
             super(itemView);
@@ -103,6 +116,8 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SimpleViewHo
             title = itemView.findViewById(R.id.title);
             duration = itemView.findViewById(R.id.duration);
             editSongDetials=itemView.findViewById(R.id.editSongDetails);
+            tvLyrics=itemView.findViewById(R.id.tvLyrics);
+            tvLyrics.setText("");
             editSongDetials.setOnClickListener(this);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
